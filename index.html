@@ -1662,7 +1662,8 @@ const Rotina = ((M, M5) => {
   const HOJE = (() => { const d = new Date(); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`; })();
   // Link do Gem compartilhado. Preenchido pelo criador quando o Gem estiver publicado.
   const GEM_URL = "https://gemini.google.com/gem/17dSyA3JqFdBsQxhQQkQZv4hx2vyNK-RU?usp=sharing";
-  const KEY = "copiloto-ficha-v1", KEY_BACKUP = "copiloto-ficha-v1-antes-do-exemplo", KEY_ABA = "copiloto-aba";
+  const KEY = "copiloto-v12-ficha", KEY_BACKUP = "copiloto-v12-ficha-antes-do-exemplo", KEY_ABA = "copiloto-v12-aba";
+  const KEYS_ANTIGAS = ["copiloto-ficha-v1", "copiloto-ficha-v1-antes-do-exemplo", "copiloto-aba"];
   // rendimento da reserva vem do cenário: 100% do CDI menos IR de 15% (premissa visível na aba Cenário)
   const PARAMS = { rendimento_mensal: M5.params(CENARIO).rendimento_mensal, taxa_cara: 0.03 };
   const TABS = ["inicio", "fechar", "cadastro", "extratos", "mes", "relatorio", "video", "planejar", "cenario", "comprar", "chat", "ficha", "guia", "teste"];
@@ -3016,7 +3017,7 @@ const Rotina = ((M, M5) => {
   // ---------- apagar tudo (Cadastro e Minha Ficha) ----------
   function apagarTudo() {
     clearTimeout(saveTimer); try { vidParar(); } catch (e) {}
-    [KEY, KEY_BACKUP, KEY_ABA].forEach((k) => ls.del(k));
+    [KEY, KEY_BACKUP, KEY_ABA, ...KEYS_ANTIGAS].forEach((k) => ls.del(k));
     F = normalizar(null); mesSel = undefined; simDivValor = null; simExtra = 200; simJuros = { vp: 1000, pmt: 200, anos: 5 };
     fx = { etapa: "inicio", mes: null, arquivos: [], imports: null, res: null, conf: null, lembrar: true };
     extMes = null; extFiltro = "todos"; ultimoImport = null; pacoteCat = null; temaExplicar = "";
